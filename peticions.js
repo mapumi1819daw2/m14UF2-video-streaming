@@ -42,7 +42,7 @@ function pelis(response, data){
             console.log(inici+ ": dades bucle");
             
             if(doc != null){
-                response.write(doc.Títol+"<BR>");
+                response.write('<img src="data:image/png;base64,'+'doc.Títol"/>');
             }
 
             else{
@@ -83,7 +83,7 @@ function directors(response, data){
             console.log(funcio+ ": dades bucle");
             
             if(doc != null){
-                response.write("<img src='"+doc.Foto+"'/>");
+                response.write("<img src='data:image/png;base64,"+"doc.Foto'/>");
             }
 
             else{
