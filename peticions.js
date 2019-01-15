@@ -22,7 +22,7 @@ var ruta = "mongodb://localhost:27017/vstreaming";
  * @param {Paràmetre per emetre la resposta} response 
  * @param {*} data 
  */
-function inici(response, data){
+function pelis(response, data){
 
     var inici = "[Inici]";
     console.log(inici);
@@ -53,22 +53,75 @@ function inici(response, data){
     
 }
 
+
+/**
+ * Directors
+ * 
+ * Nom
+ * Foto
+ * Bio
+ * Pelis
+ */
+function directors(response, data){
+
+    var funcio = "[directors] ";
+    console.log(funcio);
+
+
+    MongoClient.connect(ruta, function(err, db){
+        assert.equal(null, err);
+        console.log(funcio+ ": conexió correcta");
+        
+
+        response.writeHead(200, {
+            "Content-Type": "text/html; charset=utf-8"});
+
+        /* Obtenim totes les dades */
+        var dades = db.collection('directors').find({});
+        dades.each(function (err, doc){
+            assert.equal(null, err);
+            console.log(funcio+ ": dades bucle");
+            
+            if(doc != null){
+                response.write("<img src='"+doc.Foto+"'/>");
+            }
+
+            else{
+                response.end();
+            }
+        });
+    });
+}
+
+
 function preferits(response, data){
-    console.log("[Preferits]");
-}
+    var funcio = "[preferits] ";
+    console.log(funcio);
 
-function cerca(response, data){
-
-    var cerca = "cerca";
-
-    console.log(cerca);
-
-    
-    console.log(cerca+": valor "+ querystring.parse(data)["Director"]);
-    
 
 }
+function cercaPelis(response, data){
+    var funcio = "[cercaPelis] ";
+    console.log(funcio);
 
-exports.inici = inici;
+
+    console.log(funcio+": valor "+ querystring.parse(data)["Director"]);
+}
+
+
+
+function cercaDirectors(response, data){
+    var funcio = "[cercaDirectors] ";
+    console.log(funcio);
+
+
+    console.log(funcio+": valor "+ querystring.parse(data)["Director"]);
+}
+
+
+
+exports.pelis = pelis;
+exports.directors = directors;
 exports.preferits = preferits;
-exports.cerca = cerca;
+exports.cercaPelis = cercaPelis;
+exports.cercaDirectors = cercaDirectors;
