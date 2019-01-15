@@ -10,11 +10,11 @@ function iniciar(encaminar, manegador){
         var pathname = url.parse(request.url).pathname;
         console.log("[servidor]: Petició per a "+ pathname+ "rebuda");
 
-        /* encaminar.encaminador(manegador, pathname, response, data);
+        encaminar.encaminador(manegador, pathname, response, data);
 
         
- */
-        request.setEncoding("utf8");
+ 
+        /* request.setEncoding("utf8");
 
         request.addListener("data", function(trozoPosteado) {
 			data += trozoPosteado;
@@ -23,7 +23,7 @@ function iniciar(encaminar, manegador){
 
 		request.addListener("end", function() {
 			encaminar.encaminador(manegador, pathname, response, data);
-		});
+		}); */
     }
 
 
