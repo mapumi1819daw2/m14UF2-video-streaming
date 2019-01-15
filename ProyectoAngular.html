@@ -9,24 +9,40 @@
 
 
 
+    <script>
+        window.onload=function(){
+        document.getElementById("Main").addEventListener("mouseover", mouseOver);
+        document.getElementById("Main").addEventListener("mouseout", mouseOut);
+
+        function mouseOver() {
+            document.getElementById("menu").style.display = "block";
+        }
+
+        function mouseOut() {
+            document.getElementById("menu").style.display = "none";
+        }
+    }
+
+    </script>
 </head>
 
 <body>
-        <div id="menu">
-                <ul>
-                    <li><a href="index.html">GIGADEDE</a></li>
-                    <li><a href="home.html">Peliculas</a></li>
-                    <li><a href="dona.html">Directores</a></li>
-                    <li><a href="nen.html">Favoritos</a></li>
-                    <!-- <li><a href="contacte.html">Contacte</a></li>
+    <div id="menu">
+        <ul>
+            <li><a href="#">GIGADEDE</a></li>
+            <li><a href="#">Peliculas</a></li>
+            <li><a href="#">Directores</a></li>
+            <li><a href="#">Favoritos</a></li>
+            <!-- <li><a href="contacte.html">Contacte</a></li>
                     <li><a href="nosaltres.html">Nosaltres</a></li> -->
-                </ul>
-        
-            </div>
-    <img class="Main" src="IMAGES/avengers1.jpg" alt="" > 
+        </ul>
+
+    </div><br><br><br><br><br>
+    <button id="ok" onclick="myFunction()">Try it</button>
+    <img id="Main" src="IMAGES/avengers1.jpg" alt="">
     <h3>Más películas</h3>
-    <img class="Rest" src="IMAGES/avengers2.jpg" alt="" > 
-    <img class="Rest2" src="IMAGES/avengers3.png" alt="" > 
+    <img class="Rest" src="IMAGES/avengers2.jpg" alt="">
+    <img class="Rest2" src="IMAGES/avengers3.png" alt="">
 
 
 
