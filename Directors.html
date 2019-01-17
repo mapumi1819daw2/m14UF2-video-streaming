@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Ocean</title>
+    <link rel="stylesheet" href="STYLE/DirectorsCss.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+
+    <script>
+        window.onload=function(){
+        document.getElementById("Main").addEventListener("mouseover", mouseOver);
+        document.getElementById("Main").addEventListener("mouseout", mouseOut);
+
+        function mouseOver() {
+            document.getElementById("menu").style.display = "block";
+        }
+
+        function mouseOut() {
+            document.getElementById("menu").style.display = "none";
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="menu">
+        <ul>
+            <li><a href="#">GIGADEDE</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Directores</a></li>
+            <li><a href="#">Favoritos</a></li>
+            <!-- <li><a href="contacte.html">Contacte</a></li>
+                    <li><a href="nosaltres.html">Nosaltres</a></li> -->
+        </ul>
+    </div><br><br><br><br><br>
+    <div id="">
+        <img src="/IMAGES/Directors/AntonyRusso.jpg">
+        <img src="/IMAGES/Directors/JoeRusso.jpg">
+        <img src="/IMAGES/Directors/JossWhedon.jpg">
+        <img src="/IMAGES/Directors/PedroAlmodovar.jpg"><br><br>
+        <img src="/IMAGES/Directors/QuentinTarantino.jpg">
+        <img src="/IMAGES/Directors/StevenSpilberg.jpg">
+        <img src="/IMAGES/Directors/WoodyAllen.jpg">
+        <img src="/IMAGES/Directors/ChristopherNolan.jpg">
+    </div>
+</body>
+
+</html>

@@ -11,14 +11,9 @@ var encaminador = require("./encaminador");
 
 var manegadors = {};
 
-manegadors["/pelis"] = peticions.pelis;
-manegadors["/directors"] = peticions.directors;
+manegadors["/"] = peticions.inici;
 manegadors["/preferits"] = peticions.preferits;
-manegadors["/cercaPelis"] = peticions.cerca;
-manegadors["/cercaDirectors"] = peticions.cerca;
+manegadors["/cerca"] = peticions.cerca;
 
 
 servidor.iniciar(encaminador, manegadors);
-
-
-/* BOTO PELI DIRECTOR FAV (CERCA PER CADA APARTAT) */
