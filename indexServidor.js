@@ -11,7 +11,7 @@ var encaminador = require("./encaminador");
 
 var manegadors = {};
 
-manegadors["/pelis"] = peticions.pelis;
+manegadors["/pelis"] = peticions.tornaPelis;
 manegadors["/directors"] = peticions.directors;
 manegadors["/preferits"] = peticions.preferits;
 manegadors["/cercaPelis"] = peticions.cerca;

@@ -1,12 +1,67 @@
 var querystring = require("querystring");
 
 
-var MongoClient = require("mongodb").MongoClient;
-var assert = require("assert");
+var pelis = [
+    {
+        titol:"The Promise",
+        director:"",
+        video: "pelis/The Promise.mp4",
+        foto: null,
+        descripcioFoto: "Foto",
+        Preferit: false,
+        Genere:"npi"
+    },
+    {
+        titol:"Transfomers 4",
+        director:"",
+        video: "pelis/Transfomers4.mp4",
+        foto: null,
+        descripcioFoto: "Foto",
+        Preferit: true,
+        Genere:"npi"
+    },
+    {
+        titol:"Tron Legacy",
+        director:"",
+        video: "pelis/Tron Legacy.mp4",
+        foto: null,
+        descripcioFoto: "Foto",
+        Preferit: true,
+        Genere:"npi"
+    }
 
-var ObjectId = require("mongodb").ObjectID;
 
-var ruta = "mongodb://localhost:27017/vstreaming";
+];
+
+
+var directors = [
+    {
+        nom: "director",
+        foto: "directors/StevenSpilberg.jpg",
+        bio: "gran director",
+        pelis: [
+            {
+                nom: "The Promise",
+            }
+        ]
+    },
+    {
+        nom: "director",
+        foto: "directors/QuentinTarantino.jpg",
+        bio: "gran director",
+        pelis: [
+            {
+                nom: "Transfomers4",
+            }
+        ]
+    }
+];
+
+
+
+
+
+/* var ruta = "mongodb://localhost:27017/vstreaming"; */
 
 /**
  * Funció crida inicial que retornarà
@@ -22,12 +77,12 @@ var ruta = "mongodb://localhost:27017/vstreaming";
  * @param {Paràmetre per emetre la resposta} response 
  * @param {*} data 
  */
-function pelis(response, data){
+function tornaPelis(response, data){
 
-    var inici = "[Inici]";
+    var inici = "[tornaPelis ]";
     console.log(inici);
 
-    MongoClient.connect(ruta, function(err, db){
+   /*  MongoClient.connect(ruta, function(err, db){
         assert.equal(null, err);
         console.log(inici+ ": conexió correcta");
         console.log(inici+ ": consulta de totes les dades");
@@ -36,7 +91,7 @@ function pelis(response, data){
             "Content-Type": "text/html; charset=utf-8"});
 
         /* Obtenim totes les dades */
-        var dades = db.collection('videos').find({});
+        /*var dades = db.collection('videos').find({});
         dades.each(function (err, doc){
             assert.equal(null, err);
             console.log(inici+ ": dades bucle");
@@ -49,8 +104,48 @@ function pelis(response, data){
                 response.end();
             }
         });
-    });
+    }); */
+
+
+    const path = 'assets/sample.mp4'
+  const stat = fs.statSync(path)
+  const fileSize = stat.size
+  const range = req.headers.range
+  if (range) {
+    const parts = range.replace(/bytes=/, "").split("-")
+    const start = parseInt(parts[0], 10)
+    const end = parts[1] 
+      ? parseInt(parts[1], 10)
+      : fileSize-1
+    const chunksize = (end-start)+1
+    const file = fs.createReadStream(path, {start, end})
+    const head = {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(206, head);
+    file.pipe(res);
+  } else {
+    const head = {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4',
+    }
+    res.writeHead(200, head)
+    fs.createReadStream(path).pipe(res)
+  }
+
+
+
+
+    response.writeHead(200, {
+            "Content-Type": "application/json; charset=utf-8"});
     
+    response.write(JSON.stringify(pelis));
+
+    response.end();
+
 }
 
 
@@ -62,22 +157,22 @@ function pelis(response, data){
  * Bio
  * Pelis
  */
-function directors(response, data){
+function tornadirectors(response, data){
 
-    var funcio = "[directors] ";
+    var funcio = "[tornadirectors ] ";
     console.log(funcio);
 
 
-    MongoClient.connect(ruta, function(err, db){
+     /* MongoClient.connect(ruta, function(err, db){
         assert.equal(null, err);
         console.log(funcio+ ": conexió correcta");
         
 
         response.writeHead(200, {
-            "Content-Type": "text/html; charset=utf-8"});
+            "Content-Type": "text/html; charset=utf-8"}); */
 
         /* Obtenim totes les dades */
-        var dades = db.collection('directors').find({});
+        /* var dades = db.collection('directors').find({});
         dades.each(function (err, doc){
             assert.equal(null, err);
             console.log(funcio+ ": dades bucle");
@@ -90,7 +185,15 @@ function directors(response, data){
                 response.end();
             }
         });
-    });
+    }); */
+
+    response.writeHead(200, {
+        "Content-Type": "application/json; charset=utf-8"});
+
+response.write(JSON.stringify(directors));
+
+response.end();
+
 }
 
 
@@ -120,8 +223,8 @@ function cercaDirectors(response, data){
 
 
 
-exports.pelis = pelis;
-exports.directors = directors;
+exports.tornaPelis = tornaPelis;
+exports.tornadirectors = tornadirectors;
 exports.preferits = preferits;
 exports.cercaPelis = cercaPelis;
 exports.cercaDirectors = cercaDirectors;
